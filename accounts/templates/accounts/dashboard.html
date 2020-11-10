@@ -4,10 +4,12 @@
 {% block content %}
 
 {% include 'accounts/status_row.html' %}
+{% load custom_perms %}
 
 <br>
 
 <div class="row">
+	{% if request.user|has_group:"Manager" or request.user|has_group:"admin" %}
 	<div class="col-md-5">
 		<h5>CUSTOMERS: {{total_customers}}</h5>
 		<hr>
@@ -29,6 +31,7 @@
 			</table>
 		</div>
 	</div>
+	{% endif %}
 
 	<div class="col-md-7">
 		<h5>LAST 5 ORDERS</h5>
